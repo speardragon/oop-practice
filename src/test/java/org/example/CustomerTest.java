@@ -1,6 +1,15 @@
 package org.example;
 
+import org.example.Cooking.Cooking;
+import org.example.Cooking.Customer;
+import org.example.Cooking.Menu;
+import org.example.Cooking.MenuItem;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 /**
  * 음식점에서 음식 주문하는 과정 구현
@@ -25,8 +34,15 @@ import org.junit.jupiter.api.Test;
  */
 public class CustomerTest {
 
+    @DisplayName("메뉴이름에 해당하는 요리를 주문한다.")
     @Test
     void Customer() {
+        Customer customer = new Customer();
+        Menu menu = new Menu(List.of(new MenuItem("돈까스", 5000), new MenuItem("냉면", 5000)));
+        Cooking cooking = new Cooking();
+
+        assertThatCode(() -> customer.order("돈까스", menu, cooking)) // 주문할때 menu, cooking을 전달해야 요리를 할 수 있음
+                .doesNotThrowAnyException();
 
     }
 }
